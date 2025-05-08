@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Cancelled</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            color: #d9534f;
+        }
+        .container p {
+            color: #333;
+            font-size: 16px;
+        }
+        .close-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .close-btn:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="heading"></h1>
+        <p id="paragraph"></p>
+        <button id="closebtn" class="close-btn" onclick="closeTab()"></button>
+    </div>
+
+    <script>
+	// Define translations
+    const translations = {
+      en: {
+        heading: "Transaction Cancelled",
+        paragraph: "Your transaction has been cancelled. Please try again later or contact support for assistance.",
+		closebtn: "Close Tab",
+      },
+      de: {
+        heading: "Transaktion abgebrochen",
+        paragraph: "Ihre Transaktion wurde abgebrochen. Bitte versuchen Sie es später noch einmal oder wenden Sie sich an den Support, um Hilfe zu erhalten.",
+		closebtn: "Tab schließen",
+      },
+    };
+        // Dynamically set content from Pega
+     // Function to update content based on locale
+    function updateContent(locale) {
+      const headingElement = document.getElementById("heading");
+      const paragraphElement = document.getElementById("paragraph");
+	  const closebtnElement = document.getElementById("closebtn");
+
+      // Get translations for the selected locale
+      const localeContent = translations[locale] || translations["en"];
+
+      // Update the content dynamically
+      headingElement.textContent = localeContent.heading;
+      paragraphElement.textContent = localeContent.paragraph;
+	  closebtnElement.textContent = localeContent.closebtn;
+
+    }
+
+    // Initial setup: set default content based on the initial locale
+    updateContent("de");
+
+        // Close the tab
+        function closeTab() {
+            window.open('', '_self');
+            window.close();
+        }
+    </script>
+</body>
+</html>
