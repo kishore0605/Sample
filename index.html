@@ -10,7 +10,14 @@
         }
 
         .header {
-            margin-bottom:        }            margin-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        img {
+            max-width: 200px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
 
         img:hover {
             transform: scale(1.05);
@@ -24,10 +31,10 @@
             padding: 20px;
             border-radius: 8px;
             margin-top: 40px;
-            transition: opacity 1s ease; /* Fade-in transition */
+            transition: opacity 1s ease; /* Fade-in */
         }
 
-        /* Class added when container should fade in */
+        /* Applied after injected content is ready */
         .fade-in {
             opacity: 1;
         }
@@ -36,19 +43,19 @@
 <body>
 
 <div class="header">
-    <h1>Launch T‑Systems Embedded Case</h1>
+    <h1>Launch T‑Systems Portal</h1>
 
     <!-- CLICKABLE IMAGE -->
     <img id="launchEmbedBtn" src="https://logodix.com/logo/350465.png" alt="T-Systems Logo">
-    
-    <p>Click the image above to load the embedded application.</p>
+
+    <p>Click the image above to load the Pega portal.</p>
 </div>
 
 <!-- Hidden container -->
 <div id="embedContainer" class="container">
     <h2>Embedded Application</h2>
 
-    <!-- Placeholder for embed -->
+    <!-- Placeholder where the embed will appear -->
     <div id="pegaHolder"></div>
 </div>
 
@@ -57,33 +64,35 @@
 
         const container = document.getElementById("embedContainer");
 
-        // Make visible but still transparent
+        // Show container (still transparent)
         container.style.display = "block";
 
-        // Load script dynamically
+        // Load Pega script dynamically
         var s = document.createElement("script");
         s.src = "https://tsystems09.pegalabs.io/prweb/PRRestService/c11nsvc/v1/pega-embed.js";
         document.body.appendChild(s);
 
-        // After the embed script loads
         s.onload = function () {
+
             const embed = document.createElement("pega-embed");
 
+            // ✅ Your NEW PROPS (as requested)
             embed.setAttribute("id", "theEmbed");
-            embed.setAttribute("action", "createCase");
-            embed.setAttribute("caseTypeID", "Cata-Docusign-Work-DocusignTemplate");
+            embed.setAttribute("action", "openPage");
+            embed.setAttribute("pageID", "pyHome1");
+            embed.setAttribute("pageClass", "Data-Portal");
             embed.setAttribute("themeID", "pyWebSelfService");
-            embed.setAttribute("casePage", "full");
+            embed.setAttribute("casePage", "simplifiedAssignment");
             embed.setAttribute("appAlias", "docusign-comp");
             embed.setAttribute("pegaServerUrl", "https://tsystems09.pegalabs.io/prweb/");
             embed.setAttribute("autoReauth", "true");
             embed.setAttribute("authService", "pega");
-            embed.setAttribute("clientId", "13112901185708782397");
+            embed.setAttribute("clientId", "14873473185211829429");
             embed.setAttribute("style", "width:100%");
 
             document.getElementById("pegaHolder").appendChild(embed);
 
-            // Trigger fade-in AFTER embed is inserted
+            // Fade-in animation after embed is inserted
             setTimeout(() => {
                 container.classList.add("fade-in");
             }, 50);
@@ -93,9 +102,3 @@
 
 </body>
 </html>
-        }
-
-        img {
-            max-width: 200px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
