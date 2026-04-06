@@ -38,16 +38,16 @@
 
 <h1>T‑Systems Portal</h1>
 
-<p><strong>Step 1:</strong> First log in here:<br>
+<p><strong>Step 1:</strong> Login first:<br>
 <a href="https://tsystems09.pegalabs.io/prweb/" target="_blank">
     https://tsystems09.pegalabs.io/prweb/
 </a>
 </p>
 
-<p><strong>Step 2:</strong> After logging in, click the image below:</p>
+<p><strong>Step 2:</strong> Click the image below to load the portal:</p>
 
-<!-- CLICKABLE IMAGE -->
-https://logodix.com/logo/350465.png
+<!-- ✅ FIXED: CLICKABLE IMAGE WITH ID -->
+<img id="launchEmbedBtn" src="https://logodix.com/logo/350465.png" alt="Launch Portal">
 
 <div id="embedContainer" class="container">
     <h2>Embedded Application</h2>
@@ -58,8 +58,6 @@ https://logodix.com/logo/350465.png
     document.getElementById("launchEmbedBtn").addEventListener("click", function () {
 
         const container = document.getElementById("embedContainer");
-
-        // Show container
         container.style.display = "block";
 
         // Dynamically load Pega script
@@ -95,3 +93,4 @@ https://logodix.com/logo/350465.png
 
 </body>
 </html>
+``
