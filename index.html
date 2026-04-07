@@ -1,96 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>T-Systems Portal Launcher</title>
+    <meta charset="UTF-8">
+    <title>Pega Create Case on Button Click</title>
+
+    <!-- Pega Web Embed Script -->
+    <script src="https://tsystems09.pegalabs.io/prweb/PRRestService/c11nsvc/v1/pega-embed.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
-            text-align: center;
+            margin: 24px;
         }
-
-        img {
-            max-width: 200px;
+        #startBtn {
+            padding: 10px 18px;
+            font-size: 16px;
             cursor: pointer;
-            transition: transform 0.2s ease;
         }
-
-        img:hover {
-            transform: scale(1.05);
-        }
-
-        .container {
-            display: none;
-            opacity: 0;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 40px;
-            transition: opacity 1s ease;
-        }
-
-        .fade-in {
-            opacity: 1;
+        #embedContainer {
+            margin-top: 24px;
         }
     </style>
 </head>
 <body>
 
-<h1>T‑Systems Portal</h1>
+    <h2>Create DocuSign Case</h2>
 
-<p><strong>Step 1:</strong> Login first:<br>
-<a href="https://tsystems09.pegalabs.io/prweb/" target="_blank">
-    https://tsystems09.pegalabs.io/prweb/
-</a>
-</p>
+    <!-- Button to start the case -->
+    <button id="startBtn">Start Case</button>
 
-<p><strong>Step 2:</strong> Click the image below to load the portal:</p>
+    <!-- Pega Embed -->
+    <div id="embedContainer">
+        <pega-embed
+            id="theEmbed"
+            action="createCase"
+            caseTypeID="Cata-Docusign-Work-DocusignTemplate"
+            themeID="pyWebSelfService"
+            casePage="fullSelfService"
+            appAlias="docusign-comp"
+            pegaServerUrl="https://tsystems09.pegalabs.io/prweb/PRAuth/publictsi"
+            autoReauth="true"
+            authService="pega"
+            clientId="14873473185211829429"
+            style="width:100%; display:none;">
+        </pega-embed>
+    </div>
 
-<!-- ✅ FIXED: CLICKABLE IMAGE WITH ID -->
-<img id="launchEmbedBtn" src="https://logodix.com/logo/350465.png" alt="Launch Portal">
+    <script>
+        document.getElementById("startBtn").addEventListener("click", function () {
+            const embed = document.getElementById("theEmbed");
 
-<div id="embedContainer" class="container">
-    <h2>Embedded Application</h2>
-    <div id="pegaHolder"></div>
-</div>
+            // Show the embed
+            embed.style.display = "block";
 
-<script>
-    document.getElementById("launchEmbedBtn").addEventListener("click", function () {
-
-        const container = document.getElementById("embedContainer");
-        container.style.display = "block";
-
-        // Dynamically load Pega script
-        var s = document.createElement("script");
-        s.src = "https://tsystems09.pegalabs.io/prweb/PRRestService/c11nsvc/v1/pega-embed.js";
-        document.body.appendChild(s);
-
-        s.onload = function () {
-
-            const embed = document.createElement("pega-embed");
-
-            embed.setAttribute("id", "theEmbed");
-            embed.setAttribute("action", "openPage");
-            embed.setAttribute("pageID", "pyHome1");
-            embed.setAttribute("pageClass", "Data-Portal");
-            embed.setAttribute("themeID", "pyWebSelfService");
-            embed.setAttribute("casePage", "simplifiedAssignment");
-            embed.setAttribute("appAlias", "docusign-comp");
-            embed.setAttribute("pegaServerUrl", "https://tsystems09.pegalabs.io/prweb/");
-            embed.setAttribute("autoReauth", "true");
-            embed.setAttribute("authService", "pega");
-            embed.setAttribute("clientId", "14873473185211829429");
-            embed.setAttribute("style", "width:100%");
-
-            document.getElementById("pegaHolder").appendChild(embed);
-
-            setTimeout(() => {
-                container.classList.add("fade-in");
-            }, 50);
-        };
-    });
-</script>
+            // Start the case explicitly
+            if (embed && typeof embed.start === "function") {
+                embed.start();
+            } else {
+                console.error("Pega embed not initialized yet.");
+            }
+        });
+    </script>
 
 </body>
 </html>
-``
