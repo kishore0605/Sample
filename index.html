@@ -2,65 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pega Create Case on Button Click</title>
-
-    <!-- Pega Web Embed Script -->
-    <script src="https://tsystems09.pegalabs.io/prweb/PRRestService/c11nsvc/v1/pega-embed.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 24px;
-        }
-        #startBtn {
-            padding: 10px 18px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #embedContainer {
-            margin-top: 24px;
-        }
-    </style>
+    <title>T‑Systems Pega Embed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-    <h2>Create DocuSign Case</h2>
+    <!-- Load Pega Embed JS -->
+    <script src="https://tsystems09.pegalabsestService/c11nsvc/v1/pega-embed.js</script>
 
-    <!-- Button to start the case -->
-    <button id="startBtn">Start Case</button>
-
-    <!-- Pega Embed -->
-    <div id="embedContainer">
-        <pega-embed
-            id="theEmbed"
-            action="createCase"
-            caseTypeID="Cata-Docusign-Work-DocusignTemplate"
-            themeID="pyWebSelfService"
-            casePage="fullSelfService"
-            appAlias="docusign-comp"
-            pegaServerUrl="https://tsystems09.pegalabs.io/prweb/"
-            autoReauth="true"
-            
-
-         
-        </pega-embed>
-    </div>
-
-    <script>
-        document.getElementById("startBtn").addEventListener("click", function () {
-            const embed = document.getElementById("theEmbed");
-
-            // Show the embed
-            embed.style.display = "block";
-
-            // Start the case explicitly
-            if (embed && typeof embed.start === "function") {
-                embed.start();
-            } else {
-                console.error("Pega embed not initialized yet.");
-            }
-        });
-    </script>
+    <!-- Pega Embed Component -->
+    <pega-embed
+        id="theEmbed"
+        action="openPage"
+        pageID="pyHome1"
+        pageClass="Data-Portal"
+        themeID="pyWebSelfService"
+        casePage="assignment"
+        appAlias="docusign-comp"
+        pegaServerUrl="https://tsystems09.pegalabs.io/prweb/"
+        autoReauth="true"
+        authService="pega"
+        clientId="10499839826215351154"
+        style="width:100%; min-height:100vh;">
+    </pega-embed>
 
 </body>
 </html>
