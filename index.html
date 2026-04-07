@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pega Web Embed on GitHub Pages</title>
+  <title>Pega Login → Web Embed Launcher</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -13,48 +13,90 @@
 
     body {
       margin: 0;
-      padding: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #f4f6f8;
+      background: #f4f6f8;
       color: #333;
     }
 
-    h1 {
-      text-align: center;
-      padding: 15px;
-      margin: 0;
+    header {
       background: #003b5c;
-      color: white;
+      color: #fff;
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 18px;
     }
 
-    /* Container for the Pega Embed */
-    .embed-wrapper {
+    .center {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #0078d4;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    /* Embed area */
+    #embedSection {
+      display: none;
       width: 100%;
-      min-height: 100vh; /* ✅ critical so embed is visible */
-      background: #ffffff;
+      height: calc(100vh - 60px);
     }
 
     pega-embed {
-      display: block;      /* ✅ required */
+      display: block;
       width: 100%;
-      min-height: 100vh;   /* ✅ required */
-      border: none;
+      height: 100%;
     }
   </style>
 </head>
 
 <body>
-  <h1>Pega Web Embed</h1>
+  <header>Pega Application</header>
 
-  <div class="embed-wrapper">
+  <!-- STEP 1: Login Screen -->
+  <div id="loginSection" class="center">
+    <h2>Login to Pega</h2>
 
-    <!-- ✅ Load Pega Embed Script -->
+    <p>You will be redirected to the Pega login page.</p>
+
+    <!-- ✅ Pega login opens in same tab -->
+    <a
+      href="https://tsystems09.pegalabs.io/prweb/"
+      target="_self"
+    >
+      <button>Login</button>
+    </a>
+
+    <p style="font-size: 13px; color: #666; max-width: 420px; text-align: center;">
+      After successful login, return to this page and click
+      <strong>Launch Application</strong>.
+    </p>
+
+    <button onclick="showEmbed()">Launch Application</button>
+  </div>
+
+  <!-- STEP 2: Web Embed -->
+  <div id="embedSection">
+    <!-- Load Pega Embed script ONLY when needed -->
     <script
       src="https://tsystems09.pegalabs.io/prweb/PRRestService/c11nsvc/v1/pega-embed.js"
-      defer>
-    </script>
+      defer
+    ></script>
 
-    <!-- ✅ Pega Web Embed Component -->
     <pega-embed
       id="theEmbed"
       action="openPage"
@@ -67,10 +109,15 @@
       autoReauth="true"
       authService="pega"
       clientId="10499839826215351154"
-      style="width:100%">
+      style="width:100%; height:100%;">
     </pega-embed>
-
   </div>
 
+  <script>
+    function showEmbed() {
+      document.getElementById("loginSection").style.display = "none";
+      document.getElementById("embedSection").style.display = "block";
+    }
+  </script>
 </body>
 </html>
