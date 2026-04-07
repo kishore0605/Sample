@@ -1,30 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>T‑Systems Pega Embed</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Pega Web Embed on GitHub Pages</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 15px;
+      margin: 0;
+      background: #003b5c;
+      color: white;
+    }
+
+    /* Container for the Pega Embed */
+    .embed-wrapper {
+      width: 100%;
+      min-height: 100vh; /* ✅ critical so embed is visible */
+      background: #ffffff;
+    }
+
+    pega-embed {
+      display: block;      /* ✅ required */
+      width: 100%;
+      min-height: 100vh;   /* ✅ required */
+      border: none;
+    }
+  </style>
 </head>
+
 <body>
+  <h1>Pega Web Embed</h1>
 
-    <!-- Load Pega Embed JS -->
-    <script src="https://tsystems09.pegalabsestService/c11nsvc/v1/pega-embed.js</script>
+  <div class="embed-wrapper">
 
-    <!-- Pega Embed Component -->
+    <!-- ✅ Load Pega Embed Script -->
+    <script
+      src="https://tsystems09.pegalabs.io/prweb/PRRestService/c11nsvc/v1/pega-embed.js"
+      defer>
+    </script>
+
+    <!-- ✅ Pega Web Embed Component -->
     <pega-embed
-        id="theEmbed"
-        action="openPage"
-        pageID="pyHome1"
-        pageClass="Data-Portal"
-        themeID="pyWebSelfService"
-        casePage="fullSelfService"
-        appAlias="docusign-comp"
-        pegaServerUrl="https://tsystems09.pegalabs.io/prweb/"
-        autoReauth="true"
-        authService="pega"
-        clientId="10499839826215351154"
-        style="width:100%; min-height:100vh;">
+      id="theEmbed"
+      action="openPage"
+      pageID="pyHome1"
+      pageClass="Data-Portal"
+      themeID="pyWebSelfService"
+      casePage="fullSelfService"
+      appAlias="docusign-comp"
+      pegaServerUrl="https://tsystems09.pegalabs.io/prweb/"
+      autoReauth="true"
+      authService="pega"
+      clientId="10499839826215351154"
+      style="width:100%">
     </pega-embed>
+
+  </div>
 
 </body>
 </html>
