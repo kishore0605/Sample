@@ -38,9 +38,15 @@
             themeID="pyWebSelfService"
             casePage="fullSelfService"
             appAlias="docusign-comp"
-            pegaServerUrl="https://tsystems09.pegalabs.io/prweb/PRAuth/publictsi"
+            pegaServerUrl="https://tsystems09.pegalabs.io/prweb/"
             autoReauth="true"
+
+            <!-- ✅ Authentication configuration -->
             authService="pega"
+            grantType="authCode"
+            userIdentifier="kishore.kumar"
+            password= btoa("Bangalore@123")
+
             clientId="14873473185211829429"
             style="width:100%; display:none;">
         </pega-embed>
